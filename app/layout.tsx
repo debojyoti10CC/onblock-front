@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { WalletProvider } from '@/lib/wallet-context'
+import { DemoBanner } from '@/components/demo-banner'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Dharma Protocol v2.0 - Identity as Liquidity',
+  description: 'Rent compliance capacity from verified humans for autonomous AI agent transactions',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -37,7 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        {children}
+        <WalletProvider>
+          <DemoBanner />
+          {children}
+          <Toaster position="top-right" />
+        </WalletProvider>
         <Analytics />
       </body>
     </html>
